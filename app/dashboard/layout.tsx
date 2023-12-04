@@ -38,7 +38,7 @@ const Layout = async ({ children }: LayoutProps) => {
 
   console.log(session);
 
-  const friends = await getFriendsByUserId(session.user.id);
+  const friends = (await getFriendsByUserId(session.user.id)) ?? [];
 
   const unseenRequestCount = (
     (await fetchRedis(
