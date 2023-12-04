@@ -60,7 +60,7 @@ const page = async ({}) => {
                 )}`}
                 className="relative sm:flex"
               >
-                <div className="mb-4 flex-shrink-0 sm:mb-0 sm:mr-4">
+                {/* <div className="mb-4 flex-shrink-0 sm:mb-0 sm:mr-4">
                   <div className="relative h-6 w-6">
                     <Image
                       referrerPolicy="no-referrer"
@@ -70,7 +70,7 @@ const page = async ({}) => {
                       fill
                     />
                   </div>
-                </div>
+                </div> */}
 
                 <div>
                   <h4 className="text-lg font-semibold">{friend.username}</h4>

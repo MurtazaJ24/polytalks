@@ -144,7 +144,7 @@ const MobileChatLayout: FC<MobileChatLayoutProps> = ({
 
                             <li className="-ml-6 mt-auto flex items-center">
                               <div className="flex flex-1 items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-gray-900">
-                                <div className="relative h-8 w-8 bg-gray-50">
+                                {/* <div className="relative h-8 w-8 bg-gray-50">
                                   <Image
                                     fill
                                     referrerPolicy="no-referrer"
@@ -152,7 +152,7 @@ const MobileChatLayout: FC<MobileChatLayoutProps> = ({
                                     src={session.user.image || ""}
                                     alt="Your profile picture"
                                   />
-                                </div>
+                                </div> */}
 
                                 <span className="sr-only">Your profile</span>
                                 <div className="flex flex-col">
