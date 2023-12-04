@@ -10,6 +10,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { redirect } from "next/navigation";
 import { useRef } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -62,6 +63,7 @@ export default function Onboarding() {
         "Content-Type": "application/json",
       },
     });
+    redirect("/dashboard");
   };
 
   return (

@@ -2,6 +2,7 @@ import ChatInput from "@/components/ChatInput";
 import Messages from "@/components/Messages";
 import { fetchRedis } from "@/helpers/redis";
 import { authOptions } from "@/lib/auth";
+import { db } from "@/lib/db";
 import { messageArrayValidator } from "@/lib/validations/message";
 import { getServerSession } from "next-auth";
 import Image from "next/image";
@@ -69,12 +70,10 @@ const page = async ({ params }: PageProps) => {
 
   const chatPartnerId = user.id === userId1 ? userId2 : userId1;
 
-  const chatPartnerRaw = (await fetchRedis(
-    "get",
-    `user:${chatPartnerId}`
-  )) as string;
-  const chatPartner = JSON.parse(chatPartnerRaw) as User;
+  const chatPartner = await db.user.findFirst({ where: { id: chatPartnerId } });
   const initialMessages = await getChatMessages(chatId);
+
+  if (chatPartner === null) return <></>;
 
   return (
     <div className="flex-1 justify-between flex flex-col h-full max-h-[calc(100vh-6rem)]">
@@ -85,8 +84,8 @@ const page = async ({ params }: PageProps) => {
               <Image
                 fill
                 referrerPolicy="no-referrer"
-                src={chatPartner.image}
-                alt={`${chatPartner.name} profile picture`}
+                src={chatPartner?.profile_image ?? ""}
+                alt={`${chatPartner?.username} profile picture`}
                 className="rounded-full"
               />
             </div>
@@ -95,7 +94,7 @@ const page = async ({ params }: PageProps) => {
           <div className="flex flex-col leading-tight">
             <div className="text-xl flex items-center">
               <span className="text-gray-700 mr-3 font-semibold">
-                {chatPartner.name}
+                {chatPartner.username}
               </span>
             </div>
 

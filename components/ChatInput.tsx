@@ -6,6 +6,7 @@ import { toast } from "react-hot-toast";
 import TextareaAutosize from "react-textarea-autosize";
 import { Button } from "./ui/button";
 import { Send } from "lucide-react";
+import { User } from "@prisma/client";
 
 interface ChatInputProps {
   chatPartner: User;
@@ -46,7 +47,7 @@ const ChatInput: FC<ChatInputProps> = ({ chatPartner, chatId }) => {
           rows={1}
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder={`Message ${chatPartner.name}`}
+          placeholder={`Message ${chatPartner.username}`}
           className="block w-full resize-none border-0 bg-transparent text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:py-1.5 sm:text-sm sm:leading-6"
         />
 

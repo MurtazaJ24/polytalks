@@ -2,6 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import { Message } from "@/lib/validations/message";
+import { User } from "@prisma/client";
 import { format } from "date-fns";
 import Image from "next/image";
 import { FC, useRef, useState } from "react";
@@ -90,7 +91,7 @@ const Messages: FC<MessagesProps> = ({
                   src={
                     isCurrentUser
                       ? (sessionImg as string)
-                      : (chatPartner.image as string)
+                      : (chatPartner.profile_image as string)
                   }
                   alt="Profile picture"
                   referrerPolicy="no-referrer"
