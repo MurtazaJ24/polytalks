@@ -19,13 +19,9 @@ export async function generateMetadata({
   const { user } = session;
 
   const chatPartnerId = user.id === userId1 ? userId2 : userId1;
-  const chatPartnerRaw = (await fetchRedis(
-    "get",
-    `user:${chatPartnerId}`
-  )) as string;
-  const chatPartner = JSON.parse(chatPartnerRaw) as User;
+  const chatPartner = await db.user.findFirst({ where: { id: chatPartnerId } });
 
-  return { title: `PolyTalks | ${chatPartner.name} chat` };
+  return { title: `PolyTalks | ${chatPartner?.username} chat` };
 }
 
 interface PageProps {
