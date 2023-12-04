@@ -6,7 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { FC, useEffect, useState } from "react";
 
 interface SidebarChatListProps {
-  friends: User[];
+  friends: (User | null)[];
   sessionId: string;
 }
 
@@ -19,7 +19,7 @@ const SidebarChatList: FC<SidebarChatListProps> = ({ friends, sessionId }) => {
   const router = useRouter();
   const pathname = usePathname();
   const [unseenMessages, setUnseenMessages] = useState<Message[]>([]);
-  const [activeChats, setActiveChats] = useState<User[]>(friends);
+  const [activeChats, setActiveChats] = useState<(User | null)[]>(friends);
 
   useEffect(() => {
     if (pathname?.includes("chat")) {
@@ -32,12 +32,13 @@ const SidebarChatList: FC<SidebarChatListProps> = ({ friends, sessionId }) => {
   return (
     <ul role="list" className="max-h-[25rem] overflow-y-auto -mx-2 space-y-1">
       {activeChats.sort().map((friend) => {
+        if (friend === null) return <></>;
         const unseenMessagesCount = unseenMessages.filter((unseenMsg) => {
-          return unseenMsg.senderId === friend.id;
+          return unseenMsg.senderId === friend.id!;
         }).length;
 
         return (
-          <li key={friend.id}>
+          <li key={friend?.id}>
             <a
               href={`/dashboard/chat/${chatHrefConstructor(
                 sessionId,

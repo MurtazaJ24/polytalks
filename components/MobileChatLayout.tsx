@@ -98,12 +98,14 @@ const MobileChatLayout: FC<MobileChatLayoutProps> = ({
                             role="list"
                             className="flex flex-1 flex-col gap-y-7"
                           >
-                            <li>
-                              <SidebarChatList
-                                friends={friends}
-                                sessionId={session.user.id}
-                              />
-                            </li>
+                            {friends.length > 0 ? (
+                              <li>
+                                <SidebarChatList
+                                  friends={friends}
+                                  sessionId={session.user.id}
+                                />
+                              </li>
+                            ) : null}
 
                             <li>
                               <div className="text-xs font-semibold leading-6 text-gray-400">
