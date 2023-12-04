@@ -13,7 +13,6 @@ import SidebarChatList from "./SidebarChatList";
 import { Session } from "next-auth";
 import { SidebarOption } from "@/types/typings";
 import { usePathname } from "next/navigation";
-import { User } from "@prisma/client";
 
 interface MobileChatLayoutProps {
   friends: User[];
