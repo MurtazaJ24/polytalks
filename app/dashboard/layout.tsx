@@ -103,17 +103,17 @@ const Layout = async ({ children }: LayoutProps) => {
 
             <li className="-mx-6 mt-auto flex items-center">
               <div className="flex flex-1 items-center gap-x-2 px-4 py-3 text-sm font-semibold leading-6 text-gray-900">
-                <div className="relative h-8 w-8 bg-gray-50">
-                  {/* {session.user.image ? ( */}
-                  {/* <Image
+                {/* <div className="relative h-8 w-8 bg-gray-50"> */}
+                {/* {session.user.image ? ( */}
+                {/* <Image
                     fill
                     referrerPolicy="no-referrer"
                     className="rounded-full"
                     src={session.user.image || ""}
                     alt="Your profile picture"
                   /> */}
-                  {/* ) : null} */}
-                </div>
+                {/* ) : null} */}
+                {/* </div> */}
 
                 <span className="sr-only">Your profile</span>
                 <div className="flex flex-col">

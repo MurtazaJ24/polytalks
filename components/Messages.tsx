@@ -79,7 +79,7 @@ const Messages: FC<MessagesProps> = ({
                 </span>
               </div>
 
-              <div
+              {/* <div
                 className={cn("relative w-6 h-6", {
                   "order-2": isCurrentUser,
                   "order-1": !isCurrentUser,
@@ -97,7 +97,7 @@ const Messages: FC<MessagesProps> = ({
                   referrerPolicy="no-referrer"
                   className="rounded-full"
                 />
-              </div>
+              </div> */}
             </div>
           </div>
         );

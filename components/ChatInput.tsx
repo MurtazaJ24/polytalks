@@ -7,6 +7,8 @@ import TextareaAutosize from "react-textarea-autosize";
 import { Button } from "./ui/button";
 import { Send } from "lucide-react";
 import { User } from "@prisma/client";
+import { revalidatePath } from "next/cache";
+import { useRouter } from "next/navigation";
 
 interface ChatInputProps {
   chatPartner: User;
@@ -14,6 +16,7 @@ interface ChatInputProps {
 }
 
 const ChatInput: FC<ChatInputProps> = ({ chatPartner, chatId }) => {
+  const router = useRouter();
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [input, setInput] = useState<string>("");
@@ -26,6 +29,7 @@ const ChatInput: FC<ChatInputProps> = ({ chatPartner, chatId }) => {
       await axios.post("/api/message/send", { text: input, chatId });
       setInput("");
       textareaRef.current?.focus();
+      router.refresh();
     } catch {
       toast.error("Something went wrong. Please try again later.");
     } finally {
@@ -48,7 +52,7 @@ const ChatInput: FC<ChatInputProps> = ({ chatPartner, chatId }) => {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder={`Message ${chatPartner.username}`}
-          className="block w-full resize-none border-0 bg-transparent text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:py-1.5 px-2 sm:text-sm sm:leading-6"
+          className="block w-full resize-none border-0 bg-transparent text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:py-1.5 px-2 sm:text-sm sm:leading-6 focus:outline-none"
         />
 
         <div
@@ -64,7 +68,7 @@ const ChatInput: FC<ChatInputProps> = ({ chatPartner, chatId }) => {
         <div className="absolute right-0 bottom-0 flex justify-between py-2 pl-3 pr-2">
           <div className="flex-shrin-0">
             <Button isLoading={isLoading} onClick={sendMessage} type="submit">
-              <Send />
+              {isLoading ? null : <Send />}
             </Button>
           </div>
         </div>
