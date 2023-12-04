@@ -63,7 +63,6 @@ export const authOptions: NextAuthOptions = {
             email: token.email ?? "",
           },
         });
-        console.log(dbUser);
         if (!dbUser) {
           token.id = user.id;
           return token;

@@ -54,8 +54,14 @@ export default function Onboarding() {
     },
   });
 
-  const onSubmit = (values: TFormSchema) => {
-    console.log(values);
+  const onSubmit = async (values: TFormSchema) => {
+    const response = await fetch("/api/language", {
+      method: "POST",
+      body: JSON.stringify(values),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
   };
 
   return (
