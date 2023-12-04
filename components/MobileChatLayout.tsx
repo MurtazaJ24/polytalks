@@ -16,7 +16,7 @@ import { usePathname } from "next/navigation";
 import { User } from "@prisma/client";
 
 interface MobileChatLayoutProps {
-  friends: User[];
+  friends: (User | null)[];
   session: Session;
   sidebarOptions: SidebarOption[];
   unseenRequestCount: number;
