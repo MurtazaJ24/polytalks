@@ -10,7 +10,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { useRef } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -44,6 +44,7 @@ const FormSchema = z.object({
 type TFormSchema = z.infer<typeof FormSchema>;
 
 export default function Onboarding() {
+  const router = useRouter();
   const learnRef = useRef<HTMLDivElement>(null);
   const proficientRef = useRef<HTMLDivElement>(null);
   const form = useForm<TFormSchema>({
@@ -63,7 +64,7 @@ export default function Onboarding() {
         "Content-Type": "application/json",
       },
     });
-    redirect("/dashboard");
+    router.replace("/dashboard");
   };
 
   return (
