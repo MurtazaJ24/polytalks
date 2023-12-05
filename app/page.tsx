@@ -2,12 +2,14 @@ import CTA from "@/components/CTA";
 import Features from "@/components/Features";
 import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
+import { getAuthSession } from "@/lib/auth";
 import { ArrowRightIcon } from "lucide-react";
 
-export default function Home() {
+export default async function Home() {
+  const session = await getAuthSession();
   return (
     <>
-      <Navbar />
+      <Navbar session={session} />
       <div className="flex flex-row h-screen">
         <div className="flex-1 px-8 py-28 flex flex-col justify-between items-center">
           <div className="overflow-hidden flex flex-col items-center max-w-min mx-auto text-center gap-5">

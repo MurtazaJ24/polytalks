@@ -2,11 +2,15 @@
 import { cn } from "@/lib/utils";
 import { Dialog, Disclosure, Popover, Transition } from "@headlessui/react";
 import { ChevronDownIcon, Menu, X } from "lucide-react";
+import { Session } from "next-auth";
+import { getSession } from "next-auth/react";
 import { Fragment, useState } from "react";
 
-type Props = {};
+type Props = {
+  session: Session | null;
+};
 
-const Navbar = (props: Props) => {
+const Navbar = ({ session }: Props) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   return (
     <div className="bg-fuchsia-50 fixed top-0 w-full">
@@ -42,18 +46,33 @@ const Navbar = (props: Props) => {
           </a>
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a
-            href="/signin"
-            className="text-sm font-semibold leading-6 text-gray-900 group"
-          >
-            Log in{" "}
-            <span
-              className=" group-hover:transform group-hover:translate-x-4"
-              aria-hidden="true"
+          {session ? (
+            <a
+              href="/dashboard"
+              className="text-sm font-semibold leading-6 text-gray-900 group"
             >
-              &rarr;
-            </span>
-          </a>
+              Dashboard{" "}
+              <span
+                className=" group-hover:transform group-hover:translate-x-4"
+                aria-hidden="true"
+              >
+                &rarr;
+              </span>
+            </a>
+          ) : (
+            <a
+              href="/signin"
+              className="text-sm font-semibold leading-6 text-gray-900 group"
+            >
+              Log in{" "}
+              <span
+                className=" group-hover:transform group-hover:translate-x-4"
+                aria-hidden="true"
+              >
+                &rarr;
+              </span>
+            </a>
+          )}
         </div>
       </nav>
       <Dialog

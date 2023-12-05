@@ -15,4 +15,5 @@ export async function POST(req: Request) {
       languagesProficient: res.languagesProficient,
     },
   });
+  return new Response("success", { status: 203 });
 }

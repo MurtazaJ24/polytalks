@@ -16,7 +16,6 @@ interface ChatInputProps {
 }
 
 const ChatInput: FC<ChatInputProps> = ({ chatPartner, chatId }) => {
-  const router = useRouter();
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [input, setInput] = useState<string>("");
@@ -29,7 +28,6 @@ const ChatInput: FC<ChatInputProps> = ({ chatPartner, chatId }) => {
       await axios.post("/api/message/send", { text: input, chatId });
       setInput("");
       textareaRef.current?.focus();
-      router.refresh();
     } catch {
       toast.error("Something went wrong. Please try again later.");
     } finally {
